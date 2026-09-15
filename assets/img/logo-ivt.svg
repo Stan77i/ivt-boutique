@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 104" role="img" aria-label="IVT — Ivoire Vivrier Trading">
+  <title>IVT — Ivoire Vivrier Trading</title>
+
+  <!-- t rouge -->
+  <path d="M150 18 V72 a13 13 0 0 0 13 13 h4"
+        fill="none" stroke="#C8202E" stroke-width="19"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- i vert -->
+  <path d="M30 32 L22 85" fill="none" stroke="#009640"
+        stroke-width="19" stroke-linecap="round"/>
+
+  <!-- v vert -->
+  <path d="M62 32 L74 78 L104 32" fill="none" stroke="#009640"
+        stroke-width="19" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- swoosh vert traversant -->
+  <path d="M63 76 C 92 96, 132 88, 158 60 C 168 49, 176 40, 186 33
+           C 176 46, 166 58, 154 68 C 128 90, 92 92, 63 76 Z"
+        fill="#009640"/>
+
+  <!-- feuille -->
+  <path d="M186 12 C 197 12, 203 20, 201 31 C 190 33, 182 27, 183 17 Z"
+        fill="#8CC63F"/>
+</svg>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IVT — Ivoire Vivrier Trading | Vivrier de gros, Côte d'Ivoire</title>
+<meta name="description" content="Ivoire Vivrier Trading : fruits, légumes, féculents et herbes aromatiques en gros. Prix de marché actualisés chaque semaine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/ivt.css">
+</head>
+<body>
+
+<!-- ============ EN-TÊTE ============ -->
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="logo" href="index.html" aria-label="IVT — Ivoire Vivrier Trading">
+      <img class="logo__img" src="assets/img/logo-ivt.svg" alt="IVT"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="logo__mark" style="display:none"><span class="i">i</span><span class="v">v</span><span class="t">t</span></span>
+      <span class="logo__text">Ivoire<br>Vivrier Trading</span>
+    </a>
+
+    <nav class="nav">
+      <a href="index.html" aria-current="page">Accueil</a>
+      <a href="boutique.html">Boutique</a>
+      <a href="boutique.html#mercuriale">Prix du marché</a>
+      <a href="index.html#savoir-faire">Savoir-faire</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="cart-btn" href="panier.html">
+        Panier <span class="cart-count" data-cart-count style="display:none">0</span>
+      </a>
+      <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero__grid">
+
+      <div class="hero__side">
+        <p class="eyebrow">Campagne 2026 · Côte d'Ivoire</p>
+        <h1 class="display hero__title">Le vivrier<span class="thin">en gros</span></h1>
+        <p class="lede">Nous rassemblons la récolte des bassins de production ivoiriens et la livrons calibrée, triée et tracée — à prix de marché transparent.</p>
+      </div>
+
+      <div class="hero__stage">
+        <div class="hero__ring" aria-hidden="true"></div>
+        <div id="heroPackshot"></div>
+        <p class="hero__name" id="heroNom"></p>
+        <div class="hero__price">
+          <div class="amount" id="heroPrix"></div>
+          <div class="unit" id="heroUnite"></div>
+        </div>
+      </div>
+
+      <div class="hero__side hero__side--right">
+        <p class="eyebrow eyebrow--red">Mercuriale du <span id="heroDate"></span></p>
+        <p class="lede">Chaque lundi, le bulletin de gros est intégré au catalogue. Vous achetez au prix réel de la semaine, sans négociation opaque.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+          <a class="btn btn--primary" href="boutique.html">Voir le catalogue</a>
+          <a class="btn btn--ghost" href="#selection">La sélection</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Sélecteur produit interactif -->
+    <div class="selector">
+      <div class="selector__track" id="selecteur" role="tablist" aria-label="Produits phares"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BANDEAU PRIX ============ -->
+<div class="ticker">
+  <div class="ticker__track" id="ticker"></div>
+</div>
+
+<!-- ============ SÉLECTION ============ -->
+<section class="section" id="selection">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Disponible cette semaine</p>
+        <h2 class="display section__title">La sélection</h2>
+      </div>
+      <a class="btn btn--ghost" href="boutique.html">Tout le catalogue →</a>
+    </div>
+    <div class="grid-products" id="grilleSelection"></div>
+  </div>
+</section>
+
+<!-- ============ SAVOIR-FAIRE ============ -->
+<section class="section section--alt" id="savoir-faire">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Notre méthode</p>
+        <h2 class="display section__title">Du champ au grossiste</h2>
+      </div>
+    </div>
+    <div class="values">
+      <div class="value reveal">
+        <span class="value__num">01</span>
+        <h3>Sourcing direct</h3>
+        <p>Nous achetons auprès des coopératives de Bouaké, Korhogo, Agboville et Bonoua. Pas d'intermédiaire, pas de marge cachée.</p>
+      </div>
+      <div class="value reveal">
+        <span class="value__num">02</span>
+        <h3>Tri et calibrage</h3>
+        <p>Chaque lot est trié à la réception, calibré et conditionné en cageot ventilé ou sac selon la nature du produit.</p>
+      </div>
+      <div class="value reveal">
+        <span class="value__num">03</span>
+        <h3>Prix transparent</h3>
+        <p>Le bulletin de gros hebdomadaire alimente directement le catalogue. Le prix affiché est le prix pratiqué.</p>
+      </div>
+      <div class="value reveal">
+        <span class="value__num">04</span>
+        <h3>Livraison Abidjan</h3>
+        <p>Enlèvement sur plateforme ou livraison sous 24 à 48 h dans le district d'Abidjan et les capitales régionales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MERCURIALE ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow eyebrow--red">Prix du marché</p>
+        <h2 class="display section__title">Les plus fortes<br>variations</h2>
+        <p class="lede" style="margin-top:18px">Relevé comparé à la semaine précédente sur l'ensemble du catalogue.</p>
+      </div>
+      <a class="btn btn--ghost" href="boutique.html#mercuriale">Mercuriale complète →</a>
+    </div>
+    <div class="grid-products" id="grilleVariations"></div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section section--alt" id="contact">
+  <div class="wrap" style="text-align:center">
+    <p class="eyebrow">Commande en gros</p>
+    <h2 class="display section__title" style="margin-bottom:20px">Parlons volume</h2>
+    <p class="lede" style="margin:0 auto 34px">Restaurateurs, revendeurs, transformateurs, exportateurs — demandez une cotation adaptée à votre cadence d'approvisionnement.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a class="btn btn--primary" href="mailto:contact@ivt.ci">Demander une cotation</a>
+      <a class="btn btn--ghost" href="tel:+2250700000000">+225 07 00 00 00 00</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ PIED DE PAGE ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="margin-bottom:18px">
+          <img class="logo__img" src="assets/img/logo-ivt.svg" alt="IVT"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="logo__mark" style="display:none"><span class="i">i</span><span class="v">v</span><span class="t">t</span></span>
+          <span class="logo__text">Ivoire<br>Vivrier Trading</span>
+        </div>
+        <p>Plateforme de commerce de gros de produits vivriers ivoiriens. Fruits, légumes, féculents et herbes aromatiques.</p>
+      </div>
+      <div>
+        <h4>Catalogue</h4>
+        <ul>
+          <li><a href="boutique.html?cat=legumes">Légumes</a></li>
+          <li><a href="boutique.html?cat=fruits">Fruits</a></li>
+          <li><a href="boutique.html?cat=feculents">Féculents</a></li>
+          <li><a href="boutique.html?cat=herbes">Feuilles et herbes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Maison</h4>
+        <ul>
+          <li><a href="index.html#savoir-faire">Savoir-faire</a></li>
+          <li><a href="boutique.html#mercuriale">Prix du marché</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@ivt.ci">contact@ivt.ci</a></li>
+          <li><a href="tel:+2250700000000">+225 07 00 00 00 00</a></li>
+          <li><p>Abidjan · Côte d'Ivoire</p></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Ivoire Vivrier Trading</span>
+      <span>Prix de gros indicatifs, révisés chaque lundi</span>
+    </div>
+  </div>
+</footer>
+
+<script src="data/catalogue.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(() => {
+  const A = IVT_APP;
+  const D = A.DATA;
+
+  const PHARES = ['tomate','ananas','piment-big-sun','avocat','gombo','banane-plantain','oignon-violet','pasteque'];
+  const phares = PHARES.map(s => A.parSlug[s]).filter(Boolean);
+
+  /* ---- Hero : sélecteur interactif ---- */
+  const packshot = document.getElementById('heroPackshot');
+  const elNom    = document.getElementById('heroNom');
+  const elPrix   = document.getElementById('heroPrix');
+  const elUnite  = document.getElementById('heroUnite');
+  const piste    = document.getElementById('selecteur');
+
+  function afficher(p) {
+    packshot.innerHTML = A.mediaProduit(p, '');
+    packshot.querySelector('.packshot').style.cssText = 'aspect-ratio:1;animation:none';
+    elNom.textContent   = p.nom;
+    elPrix.textContent  = A.fmt(A.prixActuel(p)) + ' F';
+    elUnite.textContent = 'CFA / ' + p.unite + ' · ' + p.colis;
+    piste.querySelectorAll('.chip').forEach(c =>
+      c.setAttribute('aria-selected', String(c.dataset.slug === p.slug)));
+  }
+
+  phares.forEach((p, i) => {
+    const b = document.createElement('button');
+    b.className = 'chip';
+    b.type = 'button';
+    b.dataset.slug = p.slug;
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-selected', String(i === 0));
+
+    const img = document.createElement('img');
+    img.className = 'chip__thumb';
+    img.src = A.imageDe(p);
+    img.alt = '';
+    img.onerror = () => { img.style.visibility = 'hidden'; };
+
+    const lab = document.createElement('span');
+    lab.className = 'chip__label';
+    lab.textContent = p.nom;
+
+    b.append(img, lab);
+    b.addEventListener('click', () => afficher(p));
+    piste.appendChild(b);
+  });
+
+  afficher(phares[0]);
+
+  const derniere = D.semaines[D.semaines.length - 1];
+  document.getElementById('heroDate').textContent = A.dateCourte(derniere);
+
+  /* ---- Bandeau défilant ---- */
+  const ticker = document.getElementById('ticker');
+  const items = D.produits.map(p => {
+    const v = A.variation(p);
+    const f = v.sens === 'up' ? '▲' : v.sens === 'down' ? '▼' : '—';
+    const el = document.createElement('span');
+    el.className = 'ticker__item';
+    el.innerHTML = `${p.nom} <b>${A.fmt(A.prixActuel(p))} F</b> ${f} ${Math.abs(v.pct).toFixed(1)}%`;
+    return el;
+  });
+  [...items, ...items.map(e => e.cloneNode(true))].forEach(e => ticker.appendChild(e));
+
+  /* ---- Grilles ---- */
+  document.getElementById('grilleSelection').innerHTML =
+    phares.map(A.carteProduit).join('');
+
+  const variations = [...D.produits]
+    .sort((a, b) => Math.abs(A.variation(b).pct) - Math.abs(A.variation(a).pct))
+    .slice(0, 4);
+  document.getElementById('grilleVariations').innerHTML =
+    variations.map(A.carteProduit).join('');
+
+  A.observerReveal();
+})();
+</script>
+</body>
+</html>
