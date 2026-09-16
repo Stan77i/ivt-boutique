@@ -1,0 +1,59 @@
+IVT — NOMS DE FICHIERS ATTENDUS POUR LES PACKSHOTS
+==================================================
+
+Déposez ici une image par produit, au format PNG à FOND TRANSPARENT,
+carrée (1000 × 1000 px recommandé), avec le nom exact ci-dessous.
+
+Si vos photos ont un fond blanc, passez-les d'abord dans le détoureur :
+
+    pip3 install --user Pillow
+    python3 scripts/detourer.py <dossier-de-vos-photos> assets/img/produits
+
+(le script nomme les fichiers de sortie comme les fichiers d'entrée :
+ renommez donc vos photos avec les noms ci-dessous AVANT de lancer le script)
+
+
+LÉGUMES
+    tomate.png
+    gombo.png
+    oignon-blanc.png
+    oignon-violet.png
+    poivron-vert.png
+    aubergine-blanche.png
+    aubergine-violette.png
+    concombre.png
+    ail.png
+    haricot-vert-local.png
+    haricot-vert-burkina.png
+    piment-vert.png
+    piment-garba.png
+    piment-big-sun.png
+    choux.png
+
+FRUITS
+    papaye.png
+    orange-locale.png
+    orange-ghana.png
+    ananas.png
+    banane-douce.png
+    avocat.png
+    citron.png
+    pasteque.png
+
+FÉCULENTS
+    pomme-de-terre.png
+    banane-plantain.png
+    patate-douce.png
+    patate-douce-jaune.png
+
+FEUILLES ET HERBES AROMATIQUES
+    feuille-oignon.png
+    persil.png
+
+
+LOGO (à placer dans assets/img/, pas ici)
+    assets/img/logo-ivt.png     ← version couleur sur fond transparent
+
+
+Tant qu'une image manque, le site affiche à sa place un cercle pointillé
+portant le nom du produit : rien ne casse, la mise en page reste intacte.

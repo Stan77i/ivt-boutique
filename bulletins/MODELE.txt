@@ -1,0 +1,37 @@
+# Bulletin de prix de gros IVT — modèle
+# 1re ligne : date du lundi du relevé (AAAA-MM-JJ)
+# Ensuite : un produit par ligne, "Nom ; prix en FCFA"
+# Les produits non listés gardent automatiquement le prix de la semaine précédente.
+# Intégration :  node scripts/ajouter-prix.mjs bulletins/2026-09-21.txt
+
+2026-09-21
+
+Tomate ; 615
+Gombo ; 800
+Oignon blanc ; 495
+Oignon violet ; 545
+Poivron vert ; 905
+Aubergine blanche ; 390
+Aubergine violette ; 448
+Concombre ; 492
+Ail ; 1950
+Haricot vert local ; 1190
+Haricot vert Burkina ; 1005
+Piment vert ; 1490
+Piment garba ; 1820
+Piment big sun ; 2130
+Choux ; 438
+Papaye ; 328
+Orange locale ; 282
+Orange Ghana ; 368
+Ananas ; 383
+Banane douce ; 428
+Avocat ; 705
+Citron ; 590
+Pastèque ; 238
+Pomme de terre ; 532
+Banane plantain ; 392
+Patate douce ; 333
+Patate douce jaune ; 388
+Feuille d'oignon ; 970
+Persil ; 1160
