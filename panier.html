@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panier — IVT Ivoire Vivrier Trading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600;1,700&family=Jost:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/ivt.css">
+</head>
+<body class="has-ticker">
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="logo" href="index.html" aria-label="IVT — Ivoire Vivrier Trading">
+      <img class="logo__img logo__img--alt" src="assets/img/logo-je-vends.png" alt="Je vends ma récolte avec IVT">
+    </a>
+    <nav class="nav">
+      <a href="index.html">Accueil</a>
+      <a href="boutique.html">Boutique</a>
+      <a href="boutique.html#mercuriale" style="position:relative">Prix du marché<span class="pdm-badge" id="pdmBadge"></span></a>
+      <a href="https://wa.me/2250585024949" target="_blank" rel="noopener">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="fb-btn" href="https://www.facebook.com/IvoireVivrierTrading1" target="_blank" rel="noopener" aria-label="Facebook IVT">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M22 12.06C22 6.51 17.52 2 12 2S2 6.51 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg>
+      </a>
+      <a class="cart-btn" href="panier.html" aria-current="page" aria-label="Panier">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 4h2l2.4 12.2a2 2 0 0 0 2 1.6h7.4a2 2 0 0 0 2-1.6L21 8H7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.4" fill="currentColor"/><circle cx="17" cy="20" r="1.4" fill="currentColor"/></svg>
+        <span class="cart-count" data-cart-count style="display:none">0</span>
+      </a>
+      <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" id="tickerBar" aria-label="Cours du marché de gros">
+  <div class="wrap ticker__row">
+    <div class="ticker__mask">
+      <div id="tickerMarche"></div>
+    </div>
+    <button type="button" class="ticker__toggle" aria-expanded="true" aria-controls="tickerMarche" aria-label="Replier ou déplier le bandeau de prix">
+      <svg class="ticker__chevron" viewBox="0 0 24 24" width="16" height="16"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</div>
+
+<main class="wrap section section--tight">
+
+  <p class="eyebrow">Commande en gros</p>
+  <h1 class="display" style="font-size:clamp(34px,10vw,64px);margin-bottom:28px">Votre panier</h1>
+
+  <div id="panierVide" style="display:none;text-align:center;padding:56px 20px;border:1px solid var(--line)">
+    <p class="lede" style="margin:0 auto 22px">Votre panier est vide pour le moment.</p>
+    <a class="btn btn--primary" href="boutique.html">Parcourir le catalogue</a>
+  </div>
+
+  <div id="panierPlein" class="panier-grid" style="display:none">
+    <div>
+      <table class="data-table cart-table">
+        <thead>
+          <tr>
+            <th>Produit</th>
+            <th style="text-align:center">Quantité</th>
+            <th style="text-align:right">Prix unitaire</th>
+            <th style="text-align:right">Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="lignes"></tbody>
+      </table>
+    </div>
+
+    <aside class="cart-total">
+      <h2>Récapitulatif</h2>
+      <div class="row"><span>Sous-total marchandise</span><span id="sousTotal"></span></div>
+      <div class="row"><span>Transport Abidjan</span><span style="color:var(--green-light)">À la cotation</span></div>
+      <div class="row"><span>Nombre de références</span><span id="nbRefs"></span></div>
+      <div class="row row--grand"><span>Total estimé</span><span id="grandTotal"></span></div>
+
+      <div style="margin-top:20px;display:flex;flex-direction:column;gap:10px">
+        <button class="btn btn--primary btn--block" id="devis">Demander le devis par e-mail</button>
+        <a class="btn btn--green btn--block" id="devisWhatsapp" href="#" target="_blank" rel="noopener">Envoyer sur WhatsApp</a>
+        <a class="btn btn--ghost btn--block" href="boutique.html">Continuer mes achats</a>
+      </div>
+
+      <p style="font-size:11px;color:var(--ink-mute);margin:18px 0 0;line-height:1.6">
+        Les prix sont ceux du bulletin de gros de la semaine en cours. Ils sont confirmés
+        au moment de la cotation, selon les volumes et la date d'enlèvement.
+      </p>
+    </aside>
+  </div>
+
+</main>
+
+<script src="data/catalogue.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(() => {
+  const A = IVT_APP;
+  const D = A.DATA;
+  document.getElementById('pdmBadge').textContent = A.dateCourte(D.semaines[D.semaines.length - 1]);
+  const corps  = document.getElementById('lignes');
+  const vide   = document.getElementById('panierVide');
+  const plein  = document.getElementById('panierPlein');
+
+  function texteRecap() {
+    const lignes = A.lignesPanier();
+    const corpsMail = lignes
+      .map(l => `- ${l.produit.nom} : ${l.qte} ${l.produit.unite} (${A.fmt(l.total)} F)`)
+      .join('\n');
+    return `Bonjour,\n\nJe souhaite recevoir une cotation pour :\n\n${corpsMail}\n\nTotal estimé : ${A.fmt(A.totalPanier())} F CFA\n\nMerci.`;
+  }
+
+  function rendre() {
+    const lignes = A.lignesPanier();
+    corps.textContent = '';
+
+    if (!lignes.length) {
+      vide.style.display = 'block';
+      plein.style.display = 'none';
+      return;
+    }
+    vide.style.display = 'none';
+    plein.style.display = 'grid';
+
+    lignes.forEach(({ produit: p, qte, total }) => {
+      const tr = document.createElement('tr');
+
+      const tdP = document.createElement('td');
+      tdP.className = 'cell-main';
+      const bloc = document.createElement('div');
+      bloc.className = 'cart-line';
+
+      const img = document.createElement('img');
+      img.className = 'thumb';
+      img.src = A.imageDe(p);
+      img.alt = '';
+      img.loading = 'lazy';
+      img.onerror = () => { img.style.visibility = 'hidden'; };
+
+      const txt = document.createElement('div');
+      const nom = document.createElement('strong');
+      nom.textContent = p.nom;
+      const det = document.createElement('small');
+      det.textContent = p.colis + ' · ' + p.origine;
+      txt.append(nom, det);
+
+      bloc.append(img, txt);
+      tdP.appendChild(bloc);
+
+      const tdQ = document.createElement('td');
+      tdQ.dataset.label = 'Quantité';
+      const boite = document.createElement('div');
+      boite.className = 'qty';
+      boite.style.cssText = 'transform:scale(.82);transform-origin:right center';
+
+      const moins = document.createElement('button');
+      moins.type = 'button'; moins.textContent = '−';
+      moins.onclick = () => { A.definirQuantite(p.slug, qte - 5); };
+
+      const input = document.createElement('input');
+      input.type = 'number'; input.min = '1'; input.value = qte;
+      input.setAttribute('aria-label', 'Quantité ' + p.nom);
+      input.onchange = () => { A.definirQuantite(p.slug, Math.max(0, parseInt(input.value, 10) || 0)); };
+
+      const plus = document.createElement('button');
+      plus.type = 'button'; plus.textContent = '+';
+      plus.onclick = () => { A.definirQuantite(p.slug, qte + 5); };
+
+      boite.append(moins, input, plus);
+      tdQ.appendChild(boite);
+
+      const tdU = document.createElement('td');
+      tdU.dataset.label = 'Prix unitaire';
+      tdU.style.cssText = 'font-size:13px;color:var(--ink-soft)';
+      tdU.textContent = A.fmt(A.prixActuel(p)) + ' F / ' + p.unite;
+
+      const tdT = document.createElement('td');
+      tdT.dataset.label = 'Total';
+      tdT.style.cssText = 'font-family:var(--display);font-weight:700;font-size:16px';
+      tdT.textContent = A.fmt(total) + ' F';
+
+      const tdX = document.createElement('td');
+      tdX.dataset.label = '';
+      const btn = document.createElement('button');
+      btn.className = 'link-remove';
+      btn.textContent = 'Retirer';
+      btn.onclick = () => A.retirerDuPanier(p.slug);
+      tdX.appendChild(btn);
+
+      tr.append(tdP, tdQ, tdU, tdT, tdX);
+      corps.appendChild(tr);
+    });
+
+    const total = A.totalPanier();
+    document.getElementById('sousTotal').textContent  = A.fmt(total) + ' F';
+    document.getElementById('grandTotal').textContent = A.fmt(total) + ' F';
+    document.getElementById('nbRefs').textContent     = lignes.length;
+    document.getElementById('devisWhatsapp').href = A.lienWhatsApp(texteRecap());
+  }
+
+  document.getElementById('devis').onclick = () => {
+    const lignes = A.lignesPanier();
+    if (!lignes.length) return;
+    const sujet = 'Demande de cotation — IVT';
+    location.href = `mailto:ivtvivrier@gmail.com?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(texteRecap())}`;
+  };
+
+  document.addEventListener('ivt:panier', rendre);
+  rendre();
+  A.initTickerBar(document.getElementById('tickerBar'));
+})();
+</script>
+</body>
+</html>
