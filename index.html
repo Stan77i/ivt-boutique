@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IVT — Ivoire Vivrier Trading | Vivrier de gros, Côte d'Ivoire</title>
+<meta name="description" content="Ivoire Vivrier Trading : fruits, légumes, féculents et herbes aromatiques en gros. Prix de marché actualisés chaque semaine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600;1,700&family=Jost:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/ivt.css?v=muedl00t">
+</head>
+<body class="has-ticker">
+<div class="ivt-loader" id="ivtLoader" aria-hidden="true">
+  <div class="ivt-loader__stage">
+    <span class="ivt-loader__ring"></span>
+    <span class="ivt-loader__halo"></span>
+    <img class="ivt-loader__logo" src="assets/img/logo-ivt.png" alt="">
+    <span class="ivt-loader__shine"></span>
+  </div>
+  <span class="ivt-loader__bar"><span></span></span>
+</div>
+<script>
+(function(){var l=document.getElementById('ivtLoader'),t0=Date.now(),done=false;document.documentElement.classList.add('is-loading');
+function hide(){if(done)return;done=true;var w=Math.max(0,1100-(Date.now()-t0));setTimeout(function(){l.classList.add('is-done');document.documentElement.classList.remove('is-loading');setTimeout(function(){l.remove();},800);},w);}
+if(document.readyState==='complete')hide();else window.addEventListener('load',hide);setTimeout(hide,6000);})();
+</script>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="logo" href="index.html" aria-label="IVT — Ivoire Vivrier Trading">
+      <img class="logo__img" src="assets/img/logo-ivt.png" alt="IVT"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="logo__mark" style="display:none"><span class="i">i</span><span class="v">v</span><span class="t">t</span></span>
+      <span class="logo__text">Ivoire<br>Vivrier Trading</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html" aria-current="page">Accueil</a>
+      <a href="boutique.html">Boutique</a>
+      <a href="boutique.html#mercuriale" style="position:relative">Prix du marché<span class="pdm-badge" id="pdmBadge"></span></a>
+      <a href="https://wa.me/2250585024949" target="_blank" rel="noopener">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="fb-btn" href="https://www.facebook.com/IvoireVivrierTrading1" target="_blank" rel="noopener" aria-label="Facebook IVT">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M22 12.06C22 6.51 17.52 2 12 2S2 6.51 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg>
+      </a>
+      <a class="cart-btn" href="panier.html" aria-label="Panier">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 4h2l2.4 12.2a2 2 0 0 0 2 1.6h7.4a2 2 0 0 0 2-1.6L21 8H7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.4" fill="currentColor"/><circle cx="17" cy="20" r="1.4" fill="currentColor"/></svg>
+        <span class="cart-count" data-cart-count style="display:none">0</span>
+      </a>
+      <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" id="tickerBar" aria-label="Cours du marché de gros">
+  <div class="wrap ticker__row">
+    <div class="ticker__mask">
+      <div id="tickerMarche"></div>
+    </div>
+    <button type="button" class="ticker__toggle" aria-expanded="true" aria-controls="tickerMarche" aria-label="Replier ou déplier le bandeau de prix">
+      <svg class="ticker__chevron" viewBox="0 0 24 24" width="16" height="16"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</div>
+
+<main>
+
+<section class="hero" data-screen-label="Accueil — Hero">
+  <div class="wrap">
+    <div class="hero__stage" id="heroStage"></div>
+  </div>
+</section>
+
+<section class="gros" data-screen-label="Accueil — Vente en gros">
+  <div class="wrap gros__grid reveal">
+    <div class="gros__text">
+      <p class="eyebrow eyebrow--red">Vente en gros</p>
+      <h2 class="display gros__title">Achetez <em>en gros,</em><br>au prix du marché.</h2>
+      <p class="lede">Cageots, sacs, régimes, lots : IVT vend au volume, directement depuis les bassins de production, au prix relevé chaque semaine.</p>
+      <div class="gros__actions">
+        <a class="btn btn--primary" href="boutique.html">Voir le catalogue →</a>
+        <a class="btn btn--ghost" href="https://wa.me/2250585024949" target="_blank" rel="noopener">Commander sur WhatsApp</a>
+      </div>
+    </div>
+    <div class="gros__visual">
+      <span class="gros__bgword" aria-hidden="true">Gros</span>
+      <img class="gros__img" src="assets/img/gros/cliente.webp" alt="Cliente les bras chargés de deux grands sacs de fruits et légumes" width="620" height="775" loading="lazy">
+      <div class="gros__pointer" aria-hidden="true">
+        <img class="gros__arrow" src="assets/img/gros/fleche.png" alt="">
+        <span class="gros__label">Vente en gros !</span>
+      </div>
+      <span class="gros__chip gros__chip--a" aria-hidden="true">Cageot 25 kg</span>
+      <span class="gros__chip gros__chip--b" aria-hidden="true">Sac 40 kg</span>
+      <span class="gros__chip gros__chip--c" aria-hidden="true">Lot de 10 pièces</span>
+      <svg class="gros__stamp" viewBox="0 0 120 120" aria-hidden="true">
+        <defs><path id="grosRing" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"></path></defs>
+        <circle cx="60" cy="60" r="58" fill="#C8202E"></circle>
+        <circle cx="60" cy="60" r="31" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1"></circle>
+        <g class="gros__stamp-ring"><text><textPath href="#grosRing" textLength="268" lengthAdjust="spacing">EN GROS · AU PRIX DU MARCHÉ · IVT ·</textPath></text></g>
+        <text class="gros__stamp-core" x="60" y="67" text-anchor="middle">IVT</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow eyebrow--red">Prix du marché</p>
+        <h2 class="display section__title">Les plus fortes <em>variations</em></h2>
+        <p class="lede" style="margin-top:14px">Relevé comparé à la semaine précédente sur l'ensemble du catalogue.</p>
+      </div>
+      <a class="btn btn--ghost btn--sm" href="boutique.html#mercuriale">Mercuriale complète →</a>
+    </div>
+    <div class="grid-products" id="grilleVariations"></div>
+  </div>
+</section>
+
+<section class="section methode" data-screen-label="Accueil — Méthode">
+  <div class="wrap">
+    <div class="methode__art" aria-hidden="true"><img src="assets/img/methode-sacs.webp" alt="" width="760" height="608" loading="lazy"></div>
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Notre méthode</p>
+        <h2 class="display section__title">Le marché de gros, <em>en clair.</em></h2>
+      </div>
+    </div>
+    <div class="flow reveal">
+      <div class="flow__step" style="--s:0">
+        <span class="flow__icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 42V22"/><path d="M24 26c0-7 5-11 13-11 0 8-5 12-13 11z"/><path d="M24 30c0-6-4-9-11-9 0 7 4 10 11 9z"/><path d="M8 42h32"/></svg></span>
+        <p class="flow__kw">Champ</p>
+        <p class="flow__sub">Producteurs</p>
+        <ul class="flow__tags"><li>Achat cash bord champ</li><li>Dépôt-vente</li><li>Contrats producteurs</li></ul>
+      </div>
+      <div class="flow__link" style="--s:1" aria-hidden="true"><span class="flow__line"></span><span class="flow__dot"></span><span class="flow__lbl">IVT achète</span></div>
+      <div class="flow__step flow__step--ivt" style="--s:2">
+        <span class="flow__icon"><img src="assets/img/logo-ivt.png" alt="IVT"></span>
+        <p class="flow__kw">IVT rachète</p>
+        <p class="flow__sub">Acheteur en gros</p>
+        <ul class="flow__tags"><li>Tri &amp; conditionnement</li><li>Prix du marché</li></ul>
+      </div>
+      <div class="flow__link" style="--s:3" aria-hidden="true"><span class="flow__line"></span><span class="flow__dot"></span><span class="flow__lbl">IVT revend</span></div>
+      <div class="flow__step" style="--s:4">
+        <span class="flow__icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 18l3-8h26l3 8"/><path d="M8 18c0 3 2.5 5 5.3 5s5.3-2 5.3-5c0 3 2.4 5 5.4 5s5.4-2 5.4-5c0 3 2.4 5 5.3 5S40 21 40 18"/><path d="M11 23v17h26V23"/><path d="M20 40v-9h8v9"/></svg></span>
+        <p class="flow__kw">Marché urbain</p>
+        <p class="flow__sub">Acheteurs pros</p>
+        <ul class="flow__tags"><li>Grossistes</li><li>Restaurants</li><li>Hôtels</li><li>Distributeurs</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight" data-screen-label="Accueil — Contact">
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <div>
+        <h2 class="display">Un doute sur un prix ? <em>Écrivez-nous.</em></h2>
+        <p>Réponse rapide sur WhatsApp pour vos volumes, vos délais et vos tarifs de gros.</p>
+      </div>
+      <a class="btn btn--light cta-wa" href="https://wa.me/2250585024949" target="_blank" rel="noopener" aria-describedby="teamPop">Discuter sur WhatsApp →</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-claim">Le juste prix du vivrier, <em>chaque semaine.</em></p>
+        <p>Fruits, légumes, féculents et herbes aromatiques en gros — relevés sur les marchés de gros d'Abidjan et les bassins de production.</p>
+      </div>
+      <div>
+        <h4>Explorer</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="boutique.html">Boutique</a></li>
+          <li><a href="boutique.html#mercuriale">Prix du marché</a></li>
+          <li><a href="panier.html">Panier</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://wa.me/2250585024949" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://www.facebook.com/IvoireVivrierTrading1" target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Ivoire Vivrier Trading</span><span>Abidjan · Côte d'Ivoire</span></div>
+  </div>
+</footer>
+
+
+<script src="data/catalogue.js"></script>
+<script src="assets/js/app.js?v=mued401n"></script>
+<script>
+(() => {
+  const A = IVT_APP;
+  const D = A.DATA;
+  document.getElementById('pdmBadge').textContent = A.dateCourte(D.semaines[D.semaines.length - 1]);
+
+  const PHARES = ['tomate','ananas','piment-big-sun','avocat','gombo','banane-plantain','oignon-violet','pasteque'];
+  const phares = PHARES.map(s => A.parSlug[s]).filter(Boolean);
+
+  A.creerHero(document.getElementById('heroStage'), phares);
+  A.initTickerBar(document.getElementById('tickerBar'));
+
+  const variations = [...D.produits]
+    .sort((a, b) => Math.abs(A.variation(b).pct) - Math.abs(A.variation(a).pct))
+    .slice(0, 8);
+  document.getElementById('grilleVariations').innerHTML = variations.map(A.carteProduit).join('');
+
+  A.observerReveal();
+})();
+</script>
+<script src="assets/js/fx.js?v=mue98qe5" defer></script>
+</body>
+</html>
