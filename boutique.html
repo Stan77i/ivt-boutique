@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boutique — Catalogue vivrier de gros | IVT</title>
+<meta name="description" content="Légumes, fruits, féculents et herbes aromatiques en gros. Prix de marché actualisés chaque lundi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600;1,700&family=Jost:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/ivt.css?v=m2">
+<style>
+@keyframes ivtTitleGlitch {
+  0%   { transform: translate(0,0); text-shadow: none; clip-path: inset(0 0 0 0); }
+  4%   { transform: translate(-3px,1px); text-shadow: 2px 0 var(--red), -2px 0 var(--green-light); clip-path: inset(10% 0 40% 0); }
+  8%   { transform: translate(3px,-1px); clip-path: inset(55% 0 5% 0); }
+  12%  { transform: translate(-2px,0); text-shadow: -2px 0 var(--red), 2px 0 var(--green-light); clip-path: inset(20% 0 55% 0); }
+  16%  { transform: translate(2px,1px); clip-path: inset(0 0 0 0); }
+  22%  { transform: translate(-4px,-1px); text-shadow: 3px 0 var(--red), -3px 0 var(--green-light); clip-path: inset(40% 0 10% 0); }
+  28%  { transform: translate(0,0); clip-path: inset(0 0 0 0); text-shadow: 1px 0 var(--red), -1px 0 var(--green-light); }
+  36%  { transform: translate(0,0); text-shadow: none; }
+  100% { transform: translate(0,0); text-shadow: none; clip-path: inset(0 0 0 0); }
+}
+.boutique-title.is-glitching { animation: ivtTitleGlitch 0.8s steps(1) both; }
+.boutique-title {
+  position: relative; width: max-content; max-width: none;
+  font-size: clamp(68px, 14vw, 168px) !important; line-height: 0.82; letter-spacing: -0.035em; font-weight: 500;
+  margin: 0 0 30px -0.04em;
+}
+.boutique-title::before {
+  content: attr(data-text); position: absolute; left: 0.05em; top: 0.06em; z-index: -1; pointer-events: none;
+  color: transparent; -webkit-text-stroke: 1px rgba(140,198,63,0.45); font-style: italic;
+}
+.boutique-title::after { content: none; }
+#ledeCarousel { max-width: 44ch; box-sizing: border-box; height: calc(5.1em + 22px); min-height: 0 !important; }
+@media (max-width: 399px) { #ledeCarousel { height: calc(6.7em + 22px); } }
+.lede-word { display: inline-block; }
+.lede-slide { opacity: 1 !important; transform: none !important; transition: none !important; visibility: hidden; }
+.lede-slide .lede-word { opacity: 0; transform: translateY(0.9em); filter: blur(6px); }
+.lede-slide--active { visibility: visible; }
+.lede-slide--active .lede-word { animation: ledeIn 0.7s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--w) * 38ms); }
+.lede-slide--leaving { visibility: visible; position: absolute !important; left: 0; top: 0; right: 0; }
+.lede-slide--leaving .lede-word { animation: ledeOut 0.45s cubic-bezier(.4,0,.6,1) both; animation-delay: calc(var(--w) * 18ms); }
+@keyframes ledeIn { from { opacity: 0; transform: translateY(0.9em); filter: blur(6px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes ledeOut { from { opacity: 1; transform: none; filter: blur(0); } to { opacity: 0; transform: translateY(-0.7em); filter: blur(4px); } }
+.lede-progress-track { width: 150px !important; height: 2px !important; bottom: 6px !important; background: rgba(255,255,255,0.1) !important; overflow: visible !important; }
+.lede-progress { transform-origin: left; background: linear-gradient(90deg, var(--green), var(--green-light) 60%, var(--red-light)) !important; animation: ledeFill 4s linear both; box-shadow: 0 0 10px rgba(140,198,63,0.45); }
+.lede-head { position: absolute; top: 50%; left: 0; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 3px rgba(140,198,63,0.25), 0 0 12px rgba(230,57,70,0.6); animation: ledeHead 4s linear both; }
+.lede-count { position: absolute; left: 166px; bottom: 0; font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 0.2em; color: var(--ink-mute); line-height: 1; }
+.lede-count b { color: var(--ink); font-weight: 600; }
+@keyframes ledeFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes ledeHead { from { left: 0; } to { left: 100%; } }
+</style>
+</head>
+<body>
+<div class="ivt-loader" id="ivtLoader" aria-hidden="true">
+  <div class="ivt-loader__stage">
+    <span class="ivt-loader__ring"></span>
+    <span class="ivt-loader__halo"></span>
+    <img class="ivt-loader__logo" src="assets/img/logo-ivt.png" alt="">
+    <span class="ivt-loader__shine"></span>
+  </div>
+</div>
+<script>
+(function(){var l=document.getElementById('ivtLoader'),t0=Date.now(),done=false;document.documentElement.classList.add('is-loading');
+function hide(){if(done)return;done=true;var w=Math.max(0,1100-(Date.now()-t0));setTimeout(function(){l.classList.add('is-done');document.documentElement.classList.remove('is-loading');setTimeout(function(){l.remove();},800);},w);}
+if(document.readyState==='complete')hide();else window.addEventListener('load',hide);setTimeout(hide,6000);})();
+</script>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="logo" href="index.html" aria-label="IVT — Ivoire Vivrier Trading">
+      <img class="logo__img" src="assets/img/logo-ivt.png" alt="IVT"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="logo__mark" style="display:none"><span class="i">i</span><span class="v">v</span><span class="t">t</span></span>
+      <span class="logo__text">Ivoire<br>Vivrier Trading</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Accueil</a>
+      <a href="boutique.html" aria-current="page">Boutique</a>
+      <a href="prix.html" style="position:relative">Tendance prix du marché<span class="pdm-badge" id="pdmBadge"></span></a>
+    </nav>
+    <div class="header-actions">
+      <a class="fb-btn" href="https://www.facebook.com/IvoireVivrierTrading1" target="_blank" rel="noopener" aria-label="Facebook IVT">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M22 12.06C22 6.51 17.52 2 12 2S2 6.51 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg>
+      </a>
+      <a class="cart-btn" href="panier.html" aria-label="Panier">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 4h2l2.4 12.2a2 2 0 0 0 2 1.6h7.4a2 2 0 0 0 2-1.6L21 8H7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.4" fill="currentColor"/><circle cx="17" cy="20" r="1.4" fill="currentColor"/></svg>
+        <span class="cart-count" data-cart-count style="display:none">0</span>
+      </a>
+      <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="section section--tight" data-screen-label="Boutique">
+  <div class="wrap">
+    <div class="gros__grid reveal" style="margin-bottom:36px">
+    <div class="gros__text">
+      <p class="eyebrow eyebrow--red">Vente en gros</p>
+      <h1 class="display gros__title">Achetez <em>en gros,</em><br>au prix du marché.</h1>
+      <p class="lede" id="ledeCarousel" style="position:relative;min-height:3.4em;overflow:hidden;padding-bottom:22px">
+        <span class="lede-slide lede-slide--active" data-i="0"><span id="nbProduits"></span> références vivrières, en gros, au prix du marché de la semaine.</span>
+        <span class="lede-slide" data-i="1">Les prix du marché de gros, chaque semaine, en temps réel.</span>
+        <span class="lede-slide" data-i="2">Achetez mieux. Vendez plus fort. Suivez les prix IVT.</span>
+        <span class="lede-slide" data-i="3">Du producteur au grossiste — la transparence des prix vivriers en Côte d'Ivoire.</span>
+        <span class="lede-slide" data-i="4">Tomate, plantain, gombo… Connaissez le juste prix avant d'acheter.</span>
+        <span class="lede-slide" data-i="5">Ivoire Vivrier Trading — votre boussole sur les marchés d'Adjamé.</span>
+        <span class="lede-progress-track" aria-hidden="true"><span class="lede-progress" id="ledeProgress"></span><span class="lede-head" id="ledeHead"></span></span>
+        <span class="lede-count" id="ledeCount" aria-hidden="true"></span>
+      </p>
+    </div>
+    <div class="gros__visual">
+      <span class="gros__bgword" aria-hidden="true">Gros</span>
+      <img class="gros__img" src="assets/img/gros/cliente.webp" alt="Cliente les bras chargés de deux grands sacs de fruits et légumes" width="620" height="775" fetchpriority="high">
+      <div class="gros__pointer" aria-hidden="true">
+        <img class="gros__arrow" src="assets/img/gros/fleche.png" alt="">
+        <span class="gros__label">Vente en gros !</span>
+      </div>
+      <span class="gros__chip gros__chip--a" aria-hidden="true">Cageot 25 kg</span>
+      <span class="gros__chip gros__chip--b" aria-hidden="true">Sac 40 kg</span>
+      <span class="gros__chip gros__chip--c" aria-hidden="true">Lot de 10 pièces</span>
+      <svg class="gros__stamp" viewBox="0 0 120 120" aria-hidden="true">
+        <defs><path id="grosRing" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"></path></defs>
+        <circle cx="60" cy="60" r="58" fill="#C8202E"></circle>
+        <circle cx="60" cy="60" r="31" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1"></circle>
+        <g class="gros__stamp-ring"><text><textPath href="#grosRing" textLength="268" lengthAdjust="spacing">EN GROS · AU PRIX DU MARCHÉ · IVT ·</textPath></text></g>
+        <text class="gros__stamp-core" x="60" y="67" text-anchor="middle">IVT</text>
+      </svg>
+    </div>
+    </div>
+
+    <div class="filters" id="filtres" style="scroll-margin-top:calc(var(--header-h) + 16px)"></div>
+
+    <div class="toolbar">
+      <label class="search">
+        <svg class="search__icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <input type="search" id="recherche" placeholder="Rechercher un produit…" autocomplete="off">
+      </label>
+      <div class="sort">
+        <label for="tri">Trier</label>
+        <select id="tri">
+          <option value="nom">A → Z</option>
+          <option value="prix-asc">Prix croissant</option>
+          <option value="prix-desc">Prix décroissant</option>
+          <option value="variation">Plus forte variation</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid-products" id="grille"></div>
+    <p id="aucun" style="display:none;text-align:center;padding:50px 0;color:var(--ink-mute)">Aucun produit ne correspond à cette recherche.</p>
+  </div>
+</section>
+
+</main>
+<a class="cta-wa wa-float" href="https://wa.me/2250100376155" target="_blank" rel="noopener" aria-describedby="teamPop" aria-label="Discuter sur WhatsApp"><svg class="wa-float__icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.55-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.56-1.35-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg><span class="wa-float__label">Discuter sur WhatsApp →</span></a>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-claim">Le juste prix du vivrier, <em>chaque semaine.</em></p>
+        <p>Fruits, légumes, féculents et herbes aromatiques en gros — relevés sur les marchés de gros d'Abidjan et les bassins de production.</p>
+      </div>
+      <div>
+        <h4>Explorer</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="boutique.html">Boutique</a></li>
+          <li><a href="prix.html">Tendance prix du marché</a></li>
+          <li><a href="panier.html">Panier</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://wa.me/2250100376155" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://www.facebook.com/IvoireVivrierTrading1" target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Ivoire Vivrier Trading</span><span>Abidjan · Côte d'Ivoire</span></div>
+  </div>
+</footer>
+
+
+<script src="data/catalogue.js"></script>
+<script src="assets/js/app.js?v=m2"></script>
+<script>
+(() => {
+  const A = IVT_APP, D = A.DATA;
+
+  document.getElementById('nbProduits').textContent = D.produits.length;
+  document.getElementById('pdmBadge').textContent = A.dateCourte(D.semaines[D.semaines.length - 1]);
+
+  (function(){
+    const box = document.getElementById('ledeCarousel');
+    const slides = [...box.querySelectorAll('.lede-slide')];
+    const progress = document.getElementById('ledeProgress');
+    const head = document.getElementById('ledeHead');
+    const count = document.getElementById('ledeCount');
+    const hold = 3600, exitMs = 520;
+    const total = slides.length;
+    slides.forEach((s) => {
+      const nodes = [...s.childNodes];
+      s.textContent = '';
+      let w = 0;
+      nodes.forEach((n) => {
+        if (n.nodeType === 3) {
+          n.textContent.split(/(\s+)/).forEach((part) => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { s.appendChild(document.createTextNode(' ')); return; }
+            const sp = document.createElement('span'); sp.className = 'lede-word'; sp.style.setProperty('--w', w++); sp.textContent = part; s.appendChild(sp);
+          });
+        } else {
+          const sp = document.createElement('span'); sp.className = 'lede-word'; sp.style.setProperty('--w', w++); sp.appendChild(n); s.appendChild(sp);
+        }
+      });
+    });
+    let i = 0;
+    const pad = (n) => String(n).padStart(2, '0');
+    function fill() {
+      const d = hold + exitMs;
+      [progress, head].forEach((el) => { el.style.animation = 'none'; void el.offsetWidth; el.style.animation = ''; el.style.animationDuration = d + 'ms'; });
+      count.innerHTML = `<b>${pad(i + 1)}</b> / ${pad(total)}`;
+    }
+    function cycle() {
+      const current = slides[i];
+      current.classList.remove('lede-slide--active');
+      current.classList.add('lede-slide--leaving');
+      setTimeout(() => current.classList.remove('lede-slide--leaving'), exitMs + 200);
+      i = (i + 1) % total;
+      setTimeout(() => { slides[i].classList.add('lede-slide--active'); }, exitMs * 0.55);
+      fill();
+    }
+    fill();
+    setInterval(cycle, hold + exitMs);
+  })();
+
+  const idsValides = D.categories.map(c => c.id);
+  const demande = new URLSearchParams(location.search).get('cat');
+  let categorieActive = idsValides.includes(demande) ? demande : 'tout';
+
+  const barre = document.getElementById('filtres');
+  [{ id: 'tout', nom: 'Tout le catalogue' }, ...D.categories].forEach(c => {
+    const b = document.createElement('button');
+    b.className = 'filter';
+    b.type = 'button';
+    b.textContent = c.nom;
+    b.dataset.cat = c.id;
+    b.setAttribute('aria-pressed', String(c.id === categorieActive));
+    b.onclick = () => {
+      categorieActive = c.id;
+      barre.querySelectorAll('.filter').forEach(x =>
+        x.setAttribute('aria-pressed', String(x.dataset.cat === c.id)));
+      rendre();
+    };
+    barre.appendChild(b);
+  });
+
+  const grille = document.getElementById('grille');
+  const vide = document.getElementById('aucun');
+  const champ = document.getElementById('recherche');
+  const tri = document.getElementById('tri');
+
+  const sansAccent = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+  function rendre() {
+    const q = sansAccent(champ.value.trim());
+    let liste = D.produits.filter(p =>
+      (categorieActive === 'tout' || p.categorie === categorieActive) &&
+      (!q || sansAccent(p.nom).includes(q) || sansAccent(A.nomCategorie(p.categorie)).includes(q))
+    );
+
+    const mode = tri.value;
+    liste.sort((a, b) => {
+      if (mode === 'prix-asc')  return A.prixActuel(a) - A.prixActuel(b);
+      if (mode === 'prix-desc') return A.prixActuel(b) - A.prixActuel(a);
+      if (mode === 'variation') return Math.abs(A.variation(b).pct) - Math.abs(A.variation(a).pct);
+      return a.nom.localeCompare(b.nom, 'fr');
+    });
+
+    grille.style.display = liste.length ? '' : 'none';
+    vide.style.display = liste.length ? 'none' : 'block';
+    grille.innerHTML = liste.map(A.carteProduit).join('');
+    A.observerReveal();
+  }
+
+  champ.addEventListener('input', rendre);
+  tri.addEventListener('change', rendre);
+  rendre();
+})();
+</script>
+<script>
+(() => {
+  const bar = document.getElementById('filtres');
+  if (!bar) return;
+  const thumb = document.createElement('span');
+  thumb.className = 'filters__thumb';
+  thumb.setAttribute('aria-hidden', 'true');
+  const place = (instant) => {
+    if (!thumb.isConnected) bar.prepend(thumb);
+    const b = bar.querySelector('.filter[aria-pressed="true"]');
+    if (!b) return;
+    if (instant) thumb.style.transition = 'none';
+    thumb.style.width = b.offsetWidth + 'px';
+    thumb.style.transform = 'translateX(' + b.offsetLeft + 'px)';
+    if (instant) { void thumb.offsetWidth; thumb.style.transition = ''; }
+    const l = b.offsetLeft, r = l + b.offsetWidth;
+    if (l < bar.scrollLeft || r > bar.scrollLeft + bar.clientWidth) bar.scrollTo({ left: l - 24, behavior: 'smooth' });
+  };
+  new MutationObserver(() => requestAnimationFrame(() => place(false))).observe(bar, { attributes: true, subtree: true, attributeFilter: ['aria-pressed'], childList: true });
+  addEventListener('resize', () => place(true));
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => place(true));
+  place(true);
+})();
+</script>
+<script src="assets/js/fx.js?v=mue21g0z" defer></script>
+</body>
+</html>
