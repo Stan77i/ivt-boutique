@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://stan77i.github.io/ivt-boutique/sitemap.xml

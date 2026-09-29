@@ -1,0 +1,28 @@
+/* IVT — Boutique · couche d'expérience (assets/js/gl/boutique-flux.js). Variables de ivt.css uniquement.
+   Aucune règle ne touche l'image produit : pas de filtre, pas de déformation. */
+.bf-host { position: relative; isolation: isolate; }
+.bf-layer {
+  position: sticky; top: 0; z-index: -1; pointer-events: none; overflow: hidden;
+  height: 100vh; height: 100svh; margin-bottom: -100vh; margin-bottom: -100svh;
+}
+.bf-layer canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 1.4s var(--ease); }
+.bf-layer.is-on canvas { opacity: 1; }
+.bf-wrap { position: relative; }
+.bf-ghosts { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+.bf-ghost { position: absolute !important; margin: 0 !important; }
+.bf-still, .bf-still * { transition: none !important; }
+
+/* Apparition en profondeur (remplace le simple glissé du .reveal dans la grille) */
+#grille .etal.reveal { transform: translate3d(0, 26px, 0) scale(.97); transition: opacity .75s var(--ease), transform 1s cubic-bezier(.2, .7, .1, 1); }
+#grille .etal.reveal.is-in { transform: none; }
+
+/* Trajectoire produit → panier */
+.bf-spark {
+  position: fixed; left: 0; top: 0; z-index: 9999; pointer-events: none;
+  width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%;
+  background: radial-gradient(circle, var(--ink) 0%, var(--green-light) 45%, rgba(140, 198, 63, 0) 72%);
+  box-shadow: 0 0 14px 3px rgba(140, 198, 63, .55);
+}
+.bf-spark--trail { width: 6px; height: 6px; margin: -3px 0 0 -3px; box-shadow: 0 0 8px 1px rgba(140, 198, 63, .4); opacity: .7; }
+
+@media (prefers-reduced-motion: reduce) { .bf-layer { display: none; } }

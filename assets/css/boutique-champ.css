@@ -1,0 +1,13 @@
+/* IVT — Boutique · hero « le champ derrière le comptoir » (assets/js/boutique-champ.js)
+   La photo, le sceau, les pastilles et la flèche ne reçoivent aucun filtre. */
+.gh { position: relative; isolation: isolate; }
+.gh > .gros__text, .gh > .gros__visual { position: relative; z-index: 2; }
+.gh__field, .gh__back, .gh__front {
+  position: absolute; top: var(--gh-top, -120px); left: calc(50% - 50vw); width: 100vw; height: calc(100% - var(--gh-top, -120px) + 24px);
+  pointer-events: none; opacity: 0; transition: opacity 1.2s var(--ease);
+}
+.gh__field { z-index: 0; }
+.gh__back { z-index: 1; }
+.gh__front { z-index: 4; }
+.gh--on .gh__field, .gh--on .gh__back, .gh--on .gh__front { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .gh__field, .gh__back, .gh__front { transition: none; } }
